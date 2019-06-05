@@ -112,7 +112,7 @@ $bot->addChat('fourth_chat', 'fifth_chat', 'sixth_chat', 'etc...');
 ```
 It's possible to use an array (same as `chat`):
 ```php
-$bot->chat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
+$bot->addChat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
 ```
 #### Remove one or more chat(s)
 You can _remove_ chats using `removeChat`:
@@ -531,7 +531,7 @@ $bot->addChat('fourth_chat', 'fifth_chat', 'sixth_chat', 'etc...');
 ```
 Anche in questo caso è possibile usare un array per nominare le chat aggiunte:
 ```php
-$bot->chat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
+$bot->addChat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
 ```
 #### Rimuovere una chat o un insieme di chat
 Naturalmente è anche possibile rimuovere dall'elenco una o più chat tramite la funzione `removeChat`:
