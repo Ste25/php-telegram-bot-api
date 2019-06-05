@@ -49,6 +49,11 @@ The fundamental logic is the following: **_Init the library_ -> _Set chats_ -> _
 ### Initialize
 You can create a new _bot_ running the following code:
 ```php
+<?php
+require_once 'vendor/autoload.php'; //or your path to composer's autoload.
+
+use ste25\TelegramBot\Bot;
+
 $bot = new Bot('TOKEN');
 ```
 You have to replace the word _TOKEN_ with your actual _token_.
@@ -463,6 +468,11 @@ La logica che verrà seguita è la seguente: **_Inizializzazione_ -> _Impostazio
 ### Inizializzare la libreria
 È possibile creare un nuovo _bot_ con il comando:
 ```php
+<?php
+require_once 'vendor/autoload.php'; //or your path to composer's autoload.
+
+use ste25\TelegramBot\Bot;
+
 $bot = new Bot('TOKEN');
 ```
 Naturalmente al posto di _TOKEN_ occorre specificare il _token_ del proprio bot.
