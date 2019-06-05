@@ -1,14 +1,13 @@
 {
     "name": "ste25/php-telegram-bot-api",
     "description": "A simple php API to create Telegram's Bots.",
-	"keywords": ["telegram","bot","php"],
+    "keywords": ["telegram","bot","php"],
     "homepage": "https://github.com/Ste25/php-telegram-bot-api",
     "type": "library",
     "license": "MIT",
     "minimum-stability": "stable",
-	"version": "1.0.0",
     "require": {
-		"php": ">=5.5.0"
+        "php": ">=5.5.0"
 	},
     "autoload": {
         "psr-4": {
