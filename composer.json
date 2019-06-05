@@ -1,0 +1,13 @@
+{
+    "name": "ste25/php-telegram-bot-api",
+    "description": "A simple php API to create Telegram's Bots.",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "ste25\\TelegramBot\\": "src/"
+        }
+    }
+}
