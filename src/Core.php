@@ -1,6 +1,6 @@
 <?php
 
-namespace ste25\TelegramBot;
+namespace ste25\Telegram;
 
 /**
  * Core class.
