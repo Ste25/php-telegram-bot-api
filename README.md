@@ -52,7 +52,7 @@ You can create a new _bot_ running the following code:
 <?php
 require_once 'vendor/autoload.php'; //or your path to composer's autoload.
 
-use ste25\TelegramBot\Bot;
+use ste25\Telegram\Bot;
 
 $bot = new Bot('TOKEN');
 ```
@@ -471,7 +471,7 @@ La logica che verrà seguita è la seguente: **_Inizializzazione_ -> _Impostazio
 <?php
 require_once 'vendor/autoload.php'; //or your path to composer's autoload.
 
-use ste25\TelegramBot\Bot;
+use ste25\Telegram\Bot;
 
 $bot = new Bot('TOKEN');
 ```
