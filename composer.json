@@ -11,7 +11,7 @@
 	},
     "autoload": {
         "psr-4": {
-            "ste25\\TelegramBot\\": "src/"
+            "ste25\\Telegram\\": "src/"
         }
     }
 }
