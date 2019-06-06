@@ -2,7 +2,7 @@
 
 namespace ste25\TelegramBot;
 
-use ste25\TelegramBot\Core;
+use ste25\Telegram\Core;
 
 /**
  * Keyboard class.
