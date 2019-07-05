@@ -156,21 +156,4 @@ class Keyboard extends Core
         $this->keyboardOptions['rows'] = array();
         return $return;
     }
-
-    /**
-     * Get keyboard's buttons.
-     * 
-     * @param array $keyboard
-     * @return array
-     */
-    public function getButtons($keyboard)
-    {
-        $keyboard = $keyboard[array_keys($keyboard)[0]];
-        foreach($keyboard as $row) {
-            foreach($row as $single) {
-                $buttons[] = $single;
-            }
-        }
-        return $buttons;
-    }
 }
