@@ -94,7 +94,7 @@ class Bot extends Keyboard
     public function test()
     {
         $this->currentParams['method'] = 'getMe';
-        if(!isset($this->apiMethod[$this->methodName['getMe']])) $this->apiMethod[$this->methodName['getMe']] = 'getMe';
+        if(!isset($this->apiMethod['getMe'])) $this->apiMethod['getMe'] = 'getMe';
         return $this;
     }
     
@@ -111,10 +111,7 @@ class Bot extends Keyboard
      */
     public function message($text, $parse_mode = 'markdown', $disable_web_page_preview = false, $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendMessage']])) $this->apiMethod[$this->methodName['sendMessage']] = 'sendMessage';
-        if(is_array($text)) $this->addParams('sendMessage', $this->manageParams($text, ['text', 'parse_mode', 'disable_web_page_preview', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendMessage', [compact('text', 'parse_mode', 'disable_web_page_preview', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendMessage';
+        $this->setParams(func_get_args(), $this->setApi('sendMessage', ['text', 'parse_mode', 'disable_web_page_preview', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -129,10 +126,7 @@ class Bot extends Keyboard
      */
     public function forward($from_chat_id, $message_id, $disable_notification = false)
     {
-        if(!isset($this->apiMethod[$this->methodName['forwardMessage']])) $this->apiMethod[$this->methodName['forwardMessage']] = 'forwardMessage';
-        if(is_array($from_chat_id)) $this->addParams('forwardMessage', $this->manageParams($from_chat_id, ['from_chat_id', 'message_id', 'disable_notification']));
-        else $this->addParams('forwardMessage', [compact('from_chat_id', 'message_id', 'disable_notification')]);
-        $this->currentParams['method'] = 'forwardMessage';
+        $this->setParams(func_get_args(), $this->setApi('forwardMessage', ['from_chat_id', 'message_id', 'disable_notification']));
         return $this;
     }
 
@@ -149,10 +143,7 @@ class Bot extends Keyboard
      */
     public function photo($photo, $caption = '', $parse_mode = 'markdown', $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendPhoto']])) $this->apiMethod[$this->methodName['sendPhoto']] = 'sendPhoto';
-        if(is_array($photo)) $this->addParams('sendPhoto', $this->manageParams($photo, ['photo', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendPhoto', [compact('photo', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendPhoto';
+        $this->setParams(func_get_args(), $this->setApi('sendPhoto', ['photo', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -173,10 +164,7 @@ class Bot extends Keyboard
      */
     public function audio($audio, $caption = '', $parse_mode = 'markdown', $duration = null, $performer = '', $title = '', $thumb = '', $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendAudio']])) $this->apiMethod[$this->methodName['sendAudio']] = 'sendAudio';
-        if(is_array($audio)) $this->addParams('sendAudio', $this->manageParams($audio, ['audio', 'caption', 'parse_mode', 'duration', 'performer', 'title', 'thumb', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendAudio', [compact('audio', 'caption', 'parse_mode', 'duration', 'performer', 'title', 'thumb', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendAudio';
+        $this->setParams(func_get_args(), $this->setApi('sendAudio', ['audio', 'caption', 'parse_mode', 'duration', 'performer', 'title', 'thumb', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -194,10 +182,7 @@ class Bot extends Keyboard
      */
     public function document($document, $thumb = '', $caption = '', $parse_mode = 'markdown', $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendDocument']])) $this->apiMethod[$this->methodName['sendDocument']] = 'sendDocument';
-        if(is_array($document)) $this->addParams('sendDocument', $this->manageParams($document, ['document', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendDocument', [compact('document', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendDocument';
+        $this->setParams(func_get_args(), $this->setApi('sendDocument', ['document', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -219,10 +204,7 @@ class Bot extends Keyboard
      */
     public function video($video, $duration = null, $width = null, $height = null, $thumb = '', $caption = '', $parse_mode = 'markdown', $supports_streaming = false, $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendVideo']])) $this->apiMethod[$this->methodName['sendVideo']] = 'sendVideo';
-        if(is_array($video)) $this->addParams('sendVideo', $this->manageParams($video, ['video', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'supports_streaming', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendVideo', [compact('video', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'supports_streaming', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendVideo';
+        $this->setParams(func_get_args(), $this->setApi('sendVideo', ['video', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'supports_streaming', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -243,10 +225,7 @@ class Bot extends Keyboard
      */
     public function animation($animation, $duration = null, $width = null, $height = null, $thumb = '', $caption = '', $parse_mode = 'markdown', $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendAnimation']])) $this->apiMethod[$this->methodName['sendAnimation']] = 'sendAnimation';
-        if(is_array($animation)) $this->addParams('sendAnimation', $this->manageParams($animation, ['animation', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendAnimation', [compact('animation', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendAnimation';
+        $this->setParams(func_get_args(), $this->setApi('sendAnimation', ['animation', 'duration', 'width', 'height', 'thumb', 'caption', 'parse_mode', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -262,10 +241,7 @@ class Bot extends Keyboard
      */
     public function poll($question, $options, $disable_notification = false, $reply_to_message_id = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendPoll']])) $this->apiMethod[$this->methodName['sendPoll']] = 'sendPoll';
-        if(is_array($question)) $this->addParams('sendPoll', $this->manageParams($question, ['question', 'options', 'disable_notification', 'reply_to_message_id']));
-        else $this->addParams('sendPoll', [compact('question', 'options', 'disable_notification', 'reply_to_message_id')]);
-        $this->currentParams['method'] = 'sendPoll';
+        $this->setParams(func_get_args(), $this->setApi('sendPoll', ['question', 'options', 'disable_notification', 'reply_to_message_id']));
         return $this;
     }
 
@@ -278,9 +254,7 @@ class Bot extends Keyboard
      */
     public function chatAction($action)
     {
-        if(!isset($this->apiMethod[$this->methodName['sendChatAction']])) $this->apiMethod[$this->methodName['sendChatAction']] = 'sendChatAction';
-        $this->addParams('sendChatAction', [compact('action')]);
-        $this->currentParams['method'] = 'sendChatAction';
+        $this->setParams(func_get_args(), $this->setApi('sendChatAction', ['action']));
         return $this;
     }
 
@@ -295,10 +269,7 @@ class Bot extends Keyboard
      */
     public function propic($user_id, $offset = null, $limit = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['getUserProfilePhotos']])) $this->apiMethod[$this->methodName['getUserProfilePhotos']] = 'getUserProfilePhotos';
-        if(is_array($user_id)) $this->addParams('getUserProfilePhotos', $this->manageParams($user_id, ['user_id', 'offset', 'limit']));
-        else $this->addParams('getUserProfilePhotos', [compact('user_id', 'offset', 'limit')]);
-        $this->currentParams['method'] = 'getUserProfilePhotos';
+        $this->setParams(func_get_args(), $this->setApi('getUserProfilePhotos', ['user_id', 'offset', 'limit']));
         return $this;
     }
 
@@ -311,9 +282,7 @@ class Bot extends Keyboard
      */
     public function file($file_id)
     {
-        if(!isset($this->apiMethod[$this->methodName['getFile']])) $this->apiMethod[$this->methodName['getFile']] = 'getFile';
-        $this->addParams('getFile', [compact('file_id')]);
-        $this->currentParams['method'] = 'getFile';
+        $this->setParams(func_get_args(), $this->setApi('getFile', ['file_id']));
         return $this;
     }
 
@@ -327,10 +296,7 @@ class Bot extends Keyboard
      */
     public function kick($user_id, $until_date = null)
     {
-        if(!isset($this->apiMethod[$this->methodName['kickChatMember']])) $this->apiMethod[$this->methodName['kickChatMember']] = 'kickChatMember';
-        if(is_array($user_id)) $this->addParams('kickChatMember', $this->manageParams($user_id, ['user_id', 'until_date']));
-        else $this->addParams('kickChatMember', [compact('user_id', 'until_date')]);
-        $this->currentParams['method'] = 'kickChatMember';
+        $this->setParams(func_get_args(), $this->setApi('kickChatMember', ['user_id', 'until_date']));
         return $this;
     }
 
@@ -343,9 +309,7 @@ class Bot extends Keyboard
      */
     public function unban($user_id)
     {
-        if(!isset($this->apiMethod[$this->methodName['unbanChatMember']])) $this->apiMethod[$this->methodName['unbanChatMember']] = 'unbanChatMember';
-        $this->addParams('unbanChatMember', [compact('user_id')]);
-        $this->currentParams['method'] = 'unbanChatMember';
+        $this->setParams(func_get_args(), $this->setApi('unbanChatMember', ['user_id']));
         return $this;
     }
 
@@ -363,10 +327,7 @@ class Bot extends Keyboard
      */
     public function restrict($user_id, $until_date = null, $can_send_messages = true, $can_send_media_messages = true, $can_send_other_messages = true, $can_add_web_page_previews = true)
     {
-        if(!isset($this->apiMethod[$this->methodName['restrictChatMember']])) $this->apiMethod[$this->methodName['restrictChatMember']] = 'restrictChatMember';
-        if(is_array($user_id)) $this->addParams('restrictChatMember', $this->manageParams($user_id, ['user_id', 'until_date', 'can_send_messages', 'can_send_media_messages', 'can_send_other_messages', 'can_add_web_page_previews']));
-        else $this->addParams('restrictChatMember', [compact('user_id', 'until_date', 'can_send_messages', 'can_send_media_messages', 'can_send_other_messages', 'can_add_web_page_previews')]);
-        $this->currentParams['method'] = 'restrictChatMember';
+        $this->setParams(func_get_args(), $this->setApi('restrictChatMember', ['user_id', 'until_date', 'can_send_messages', 'can_send_media_messages', 'can_send_other_messages', 'can_add_web_page_previews']));
         return $this;
     }
 
@@ -387,10 +348,7 @@ class Bot extends Keyboard
      */
     public function promote($user_id, $can_change_info = false, $can_post_messages = false, $can_edit_messages = false, $can_delete_messages = false, $can_invite_users = false, $can_restrict_members = false, $can_pin_messages = false, $can_promote_members = false)
     {
-        if(!isset($this->apiMethod[$this->methodName['promoteChatMember']])) $this->apiMethod[$this->methodName['promoteChatMember']] = 'promoteChatMember';
-        if(is_array($user_id)) $this->addParams('promoteChatMember', $this->manageParams($user_id, ['user_id', 'can_change_info', 'can_post_messages', 'can_edit_messages', 'can_delete_messages', 'can_invite_users', 'can_restrict_members', 'can_pin_messages', 'can_promote_members']));
-        else $this->addParams('promoteChatMember', [compact('user_id', 'can_change_info', 'can_post_messages', 'can_edit_messages', 'can_delete_messages', 'can_invite_users', 'can_restrict_members', 'can_pin_messages', 'can_promote_members')]);
-        $this->currentParams['method'] = 'promoteChatMember';
+        $this->setParams(func_get_args(), $this->setApi('promoteChatMember', ['user_id', 'can_change_info', 'can_post_messages', 'can_edit_messages', 'can_delete_messages', 'can_invite_users', 'can_restrict_members', 'can_pin_messages', 'can_promote_members']));
         return $this;
     }
 
@@ -402,7 +360,7 @@ class Bot extends Keyboard
      */
     public function inviteLink()
     {
-        if(!isset($this->apiMethod[$this->methodName['exportChatInviteLink']])) $this->apiMethod[$this->methodName['exportChatInviteLink']] = 'exportChatInviteLink';
+        if(!isset($this->apiMethod['exportChatInviteLink'])) $this->apiMethod['exportChatInviteLink'] = 'exportChatInviteLink';
         return $this;
     }
 
@@ -415,9 +373,7 @@ class Bot extends Keyboard
      */
     public function chatTitle($title)
     {
-        if(!isset($this->apiMethod[$this->methodName['setChatTitle']])) $this->apiMethod[$this->methodName['setChatTitle']] = 'setChatTitle';
-        $this->addParams('setChatTitle', [compact('title')]);
-        $this->currentParams['method'] = 'setChatTitle';
+        $this->setParams(func_get_args(), $this->setApi('setChatTitle', ['title']));
         return $this;
     }
 
@@ -430,9 +386,7 @@ class Bot extends Keyboard
      */
     public function chatDescription($description)
     {
-        if(!isset($this->apiMethod[$this->methodName['setChatDescription']])) $this->apiMethod[$this->methodName['setChatDescription']] = 'setChatDescription';
-        $this->addParams('setChatDescription', [compact('description')]);
-        $this->currentParams['method'] = 'setChatDescription';
+        $this->setParams(func_get_args(), $this->setApi('setChatDescription', ['description']));
         return $this;
     }
 
@@ -446,10 +400,7 @@ class Bot extends Keyboard
      */
     public function pin($message_id, $disable_notification = false)
     {
-        if(!isset($this->apiMethod[$this->methodName['pinChatMessage']])) $this->apiMethod[$this->methodName['pinChatMessage']] = 'pinChatMessage';
-        if(is_array($message_id)) $this->addParams('pinChatMessage', $this->manageParams($message_id, ['message_id', 'disable_notification']));
-        else $this->addParams('pinChatMessage', [compact('message_id', 'disable_notification')]);
-        $this->currentParams['method'] = 'pinChatMessage';
+        $this->setParams(func_get_args(), $this->setApi('pinChatMessage', ['message_id', 'disable_notification']));
         return $this;
     }
 
@@ -461,7 +412,7 @@ class Bot extends Keyboard
      */
     public function unpin()
     {
-        if(!isset($this->apiMethod[$this->methodName['unpinChatMessage']])) $this->apiMethod[$this->methodName['unpinChatMessage']] = 'unpinChatMessage';
+        if(!isset($this->apiMethod['unpinChatMessage'])) $this->apiMethod['unpinChatMessage'] = 'unpinChatMessage';
         return $this;
     }
 
@@ -473,7 +424,7 @@ class Bot extends Keyboard
      */
     public function leave()
     {
-        if(!isset($this->apiMethod[$this->methodName['leaveChat']])) $this->apiMethod[$this->methodName['leaveChat']] = 'leaveChat';
+        if(!isset($this->apiMethod['leaveChat'])) $this->apiMethod['leaveChat'] = 'leaveChat';
         return $this;
     }
 
@@ -485,7 +436,7 @@ class Bot extends Keyboard
      */
     public function chatInfo()
     {
-        if(!isset($this->apiMethod[$this->methodName['getChat']])) $this->apiMethod[$this->methodName['getChat']] = 'getChat';
+        if(!isset($this->apiMethod['getChat'])) $this->apiMethod['getChat'] = 'getChat';
         return $this;
     }
 
@@ -497,7 +448,7 @@ class Bot extends Keyboard
      */
     public function admins()
     {
-        if(!isset($this->apiMethod[$this->methodName['getChatAdministrators']])) $this->apiMethod[$this->methodName['getChatAdministrators']] = 'getChatAdministrators';
+        if(!isset($this->apiMethod['getChatAdministrators'])) $this->apiMethod['getChatAdministrators'] = 'getChatAdministrators';
         return $this;
     }
 
@@ -509,7 +460,7 @@ class Bot extends Keyboard
      */
     public function membersCount()
     {
-        if(!isset($this->apiMethod[$this->methodName['getChatMembersCount']])) $this->apiMethod[$this->methodName['getChatMembersCount']] = 'getChatMembersCount';
+        if(!isset($this->apiMethod['getChatMembersCount'])) $this->apiMethod['getChatMembersCount'] = 'getChatMembersCount';
         return $this;
     }
 
@@ -522,9 +473,7 @@ class Bot extends Keyboard
      */
     public function member($user_id)
     {
-        if(!isset($this->apiMethod[$this->methodName['getChatMember']])) $this->apiMethod[$this->methodName['getChatMember']] = 'getChatMember';
-        $this->addParams('getChatMember', [compact('user_id')]);
-        $this->currentParams['method'] = 'getChatMember';
+        $this->setParams(func_get_args(), $this->setApi('getChatMember', ['user_id']));
         return $this;
     }
 
@@ -537,9 +486,7 @@ class Bot extends Keyboard
      */
     public function setSticker($sticker_set_name)
     {
-        if(!isset($this->apiMethod[$this->methodName['setChatStickerSet']])) $this->apiMethod[$this->methodName['setChatStickerSet']] = 'setChatStickerSet';
-        $this->addParams('setChatStickerSet', [compact('sticker_set_name')]);
-        $this->currentParams['method'] = 'setChatStickerSet';
+        $this->setParams(func_get_args(), $this->setApi('setChatStickerSet', ['sticker_set_name', 'disable_notification']));
         return $this;
     }
 
@@ -551,26 +498,111 @@ class Bot extends Keyboard
      */
     public function deleteSticker()
     {
-        if(!isset($this->apiMethod[$this->methodName['deleteChatStickerSet']])) $this->apiMethod[$this->methodName['deleteChatStickerSet']] = 'deleteChatStickerSet';
+        if(!isset($this->apiMethod['deleteChatStickerSet'])) $this->apiMethod['deleteChatStickerSet'] = 'deleteChatStickerSet';
         return $this;
     }
 
     /**
      * Prepare a callback query.
      * 
-     * @link
+     * @link https://core.telegram.org/bots/api#answercallbackquery
      * @param string $text
      * @param bool $show_alert
      * @param string $url
      * @param int $cache_time
      * @return $this
      */
-    public function callbackQuery($text = '', $show_alert = false, $url = '', $cache_time = 0)
+    public function callbackQuery($callback_query_id, $text = '', $show_alert = false, $url = '', $cache_time = 0)
     {
-        if(!isset($this->apiMethod[$this->methodName['answerCallbackQuery']])) $this->apiMethod[$this->methodName['answerCallbackQuery']] = 'answerCallbackQuery';
-        if(is_array($text)) $this->addParams('answerCallbackQuery', $this->manageParams($text, ['text', 'show_alert', 'url', 'cache_time']));
-        else $this->addParams('answerCallbackQuery', [compact('text', 'show_alert', 'url', 'cache_time')]);
-        $this->currentParams['method'] = 'answerCallbackQuery';
+        $this->setParams(func_get_args(), $this->setApi('answerCallbackQuery', ['callback_query_id', 'text', 'show_alert', 'url', 'cache_time']));
+        return $this;
+    }
+
+    /**
+     * Prepare to edit a message's text.
+     * 
+     * @link https://core.telegram.org/bots/api#editmessagetext
+     * @param int $message_id
+     * @param string $inline_message_id
+     * @param string $text
+     * @param string $parse_mode
+     * @param bool $disable_web_page_preview
+     * @return $this
+     */
+    public function editText($message_id, $inline_message_id, $text, $parse_mode = 'markdown', $disable_web_page_preview = false)
+    {
+        $this->setParams(func_get_args(), $this->setApi('editMessageText', ['message_id', 'inline_message_id', 'text', 'parse_mode', 'disable_web_page_preview']));
+        return $this;
+    }
+
+    /**
+     * Prepare to edit a message's caption.
+     * 
+     * @link https://core.telegram.org/bots/api#editmessagecaption
+     * @param int $message_id
+     * @param string $inline_message_id
+     * @param string $caption
+     * @param string $parse_mode
+     * @return $this
+     */
+    public function editCaption($message_id, $inline_message_id, $caption, $parse_mode = 'markdown')
+    {
+        $this->setParams(func_get_args(), $this->setApi('editMessageCaption', ['message_id', 'inline_message_id', 'caption', 'parse_mode']));
+        return $this;
+    }
+
+    /**
+     * Prepare to edit a message's media.
+     * 
+     * @link https://core.telegram.org/bots/api#editmessagemedia
+     * @param int $message_id
+     * @param string $inline_message_id
+     * @param string $media
+     * @return $this
+     */
+    public function editMedia($message_id, $inline_message_id, $media)
+    {
+        $this->setParams(func_get_args(), $this->setApi('editMessageMedia', ['message_id', 'inline_message_id', 'media']));
+        return $this;
+    }
+
+    /**
+     * Prepare to edit a message's reply markup.
+     * 
+     * @link https://core.telegram.org/bots/api#editmessagereplymarkup
+     * @param int $message_id
+     * @param string $inline_message_id
+     * @return $this
+     */
+    public function editMarkup($message_id, $inline_message_id = '')
+    {
+        $this->setParams(func_get_args(), $this->setApi('editMessageReplyMarkup', ['message_id', 'inline_message_id']));
+        return $this;
+    }
+
+    /**
+     * Prepare to stop a poll.
+     * 
+     * @link https://core.telegram.org/bots/api#stoppoll
+     * @param int $message_id
+     * @return $this
+     */
+    public function stopPoll($message_id)
+    {
+        $this->setParams(func_get_args(), $this->setApi('stopPoll', ['message_id']));
+        return $this;
+    }
+
+    /**
+     * Prepare to delete a message.
+     * 
+     * @link https://core.telegram.org/bots/api#deletemessage
+     * @param int $message_id
+     * @return $this
+     */
+    public function deleteMessage($message_id)
+    {
+        $this->setParams(func_get_args(), $this->setApi('deleteMessage', ['message_id']));
         return $this;
     }
 
