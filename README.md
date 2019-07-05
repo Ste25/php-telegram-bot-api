@@ -40,7 +40,7 @@ In addition to your _token_ you'll need:
 ### Download
 You can require this library via **composer**:
 ```
-composer require ste25/php-telegram-bot-api dev-master@dev
+composer require ste25/php-telegram-bot-api
 ```
 ### The bases
 This library's purpose is to simply dev's work.
@@ -91,6 +91,12 @@ The methods described by [the Official Telegram's API](https://core.telegram.org
 |setChatStickerSet    |setSticker       |
 |deleteChatStickerSet |deleteSticker    |
 |answerCallbackQuery  |callbackQuery    |
+|editMessageText      |editText         |
+|editMessageCaption   |editCaption      |
+|editMessageMedia     |editMedia        |
+|editMessageReplyMarkup|editMarkup      |
+|stopPoll             |stopPoll         |
+|deleteMessage        |deleteMessage    |
 ### Set one or more chat(s)
 Almost all Telegram's methods require a **chat ID**, an integer (or a string) that identify users, groups and channels. This library allow you to **set one or more IDs only _one_ time**.
 ### First chat(s)
@@ -459,7 +465,7 @@ Oltre al possesso del **token** di un bot, i requisiti per l'utilizzo della libr
 ### Importare la libreria
 È possibile importare questa libreria tramite:
 ```
-composer require ste25/php-telegram-bot-api dev-master@dev
+composer require ste25/php-telegram-bot-api
 ```
 ### La logica di base
 Questa libreria nasce con lo scopo di facilitare l'uso dei metodi messi a disposizione da Telegram per eseguire azioni tramite un bot.
@@ -510,6 +516,13 @@ I metodi forniti e descritti [dall'API Ufficiale di Telegram](https://core.teleg
 |setChatStickerSet    |setSticker       |
 |deleteChatStickerSet |deleteSticker    |
 |answerCallbackQuery  |callbackQuery    |
+|editMessageText      |editText         |
+|editMessageCaption   |editCaption      |
+|editMessageMedia     |editMedia        |
+|editMessageReplyMarkup|editMarkup      |
+|stopPoll             |stopPoll         |
+|deleteMessage        |deleteMessage    |
+
 ### Impostare una chat o un insieme di chat
 Quasi tutti i metodi di Telegram dedicati ai bot richiedono di specificare un **ID identificatore della chat** nella quale l'operazione descritta dal metodo sarà eseguita. La librearia cerca di semplificare questa operazione in modo da **evitare di specificare l'ID o gli ID** ogni volta che si richiama una funzione.
 #### Inserire le prime chat
