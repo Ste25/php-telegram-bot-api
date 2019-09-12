@@ -60,43 +60,43 @@ You have to replace the word _TOKEN_ with your actual _token_.
 ### Available methods
 The methods described by [the Official Telegram's API](https://core.telegram.org/bots/api#available-methods) availables are:
 
-|Method               |Function's name  |
-|-----                |-------------    |
-|getMe                |test             |
-|sendMessage          |message          |
-|forwardMessage       |forward          |
-|sendPhoto            |photo            |
-|sendAudio            |audio            |
-|sendDocument         |document         |
-|sendVideo            |video            |
-|sendAnimation        |animation        |
-|sendPoll             |poll             |
-|sendChatAction       |cahtAction       |
-|getUserProfilePhotos |propic           |
-|getFile              |file             |
-|kickChatMember       |kick             |
-|unbanChatMember      |unban            |
-|restrictChatMember   |restrict         |
-|promoteChatMember    |promote          |
-|exportChatInviteLink |inviteLink       |
-|setChatTitle         |chatTitle        |
-|setChatDescription   |chatDescription  |
-|pinChatMessage       |pin              |
-|unpinChatMessage     |unpin            |
-|leaveChat            |leave            |
-|getChat              |chatInfo         |
-|getChatAdministrators|admins           |
-|getChatMembersCount  |membersCount     |
-|getChatMember        |member           |
-|setChatStickerSet    |setSticker       |
-|deleteChatStickerSet |deleteSticker    |
-|answerCallbackQuery  |callbackQuery    |
-|editMessageText      |editText         |
-|editMessageCaption   |editCaption      |
-|editMessageMedia     |editMedia        |
-|editMessageReplyMarkup|editMarkup      |
-|stopPoll             |stopPoll         |
-|deleteMessage        |deleteMessage    |
+|Method               |Function's name  |Note   |
+|-----                |-------------    |-----  |
+|getMe                |test             |       |
+|sendMessage          |message          |       |
+|forwardMessage       |forward          |       |
+|sendPhoto            |photo            |       |
+|sendAudio            |audio            |       |
+|sendDocument         |document         |       |
+|sendVideo            |video            |       |
+|sendAnimation        |animation        |       |
+|sendPoll             |poll             |Arg "options" must be a json_encoded array!|
+|sendChatAction       |cahtAction       |       
+|getUserProfilePhotos |propic           |       |
+|getFile              |file             |       |
+|kickChatMember       |kick             |       |
+|unbanChatMember      |unban            |       |
+|restrictChatMember   |restrict         |       |
+|promoteChatMember    |promote          |       |
+|exportChatInviteLink |inviteLink       |       |
+|setChatTitle         |chatTitle        |       |
+|setChatDescription   |chatDescription  |       |
+|pinChatMessage       |pin              |       |
+|unpinChatMessage     |unpin            |       |
+|leaveChat            |leave            |       |
+|getChat              |chatInfo         |       |
+|getChatAdministrators|admins           |       |
+|getChatMembersCount  |membersCount     |       |
+|getChatMember        |member           |       |
+|setChatStickerSet    |setSticker       |       |
+|deleteChatStickerSet |deleteSticker    |       |
+|answerCallbackQuery  |callbackQuery    |       |
+|editMessageText      |editText         |       |
+|editMessageCaption   |editCaption      |       |
+|editMessageMedia     |editMedia        |       |
+|editMessageReplyMarkup|editMarkup      |       |
+|stopPoll             |stopPoll         |       |
+|deleteMessage        |deleteMessage    |       |
 ### Set one or more chat(s)
 Almost all Telegram's methods require a **chat ID**, an integer (or a string) that identify users, groups and channels. This library allow you to **set one or more IDs only _one_ time**.
 ### First chat(s)
@@ -485,43 +485,43 @@ Naturalmente al posto di _TOKEN_ occorre specificare il _token_ del proprio bot.
 ### Metodi disponibili
 I metodi forniti e descritti [dall'API Ufficiale di Telegram](https://core.telegram.org/bots/api#available-methods) attualmente disponibili sono:
 
-|Metodo         |Funzione nella libreria |
-|-----                |-------------    |
-|getMe                |test             |
-|sendMessage          |message          |
-|forwardMessage       |forward          |
-|sendPhoto            |photo            |
-|sendAudio            |audio            |
-|sendDocument         |document         |
-|sendVideo            |video            |
-|sendAnimation        |animation        |
-|sendPoll             |poll             |
-|sendChatAction       |cahtAction       |
-|getUserProfilePhotos |propic           |
-|getFile              |file             |
-|kickChatMember       |kick             |
-|unbanChatMember      |unban            |
-|restrictChatMember   |restrict         |
-|promoteChatMember    |promote          |
-|exportChatInviteLink |inviteLink       |
-|setChatTitle         |chatTitle        |
-|setChatDescription   |chatDescription  |
-|pinChatMessage       |pin              |
-|unpinChatMessage     |unpin            |
-|leaveChat            |leave            |
-|getChat              |chatInfo         |
-|getChatAdministrators|admins           |
-|getChatMembersCount  |membersCount     |
-|getChatMember        |member           |
-|setChatStickerSet    |setSticker       |
-|deleteChatStickerSet |deleteSticker    |
-|answerCallbackQuery  |callbackQuery    |
-|editMessageText      |editText         |
-|editMessageCaption   |editCaption      |
-|editMessageMedia     |editMedia        |
-|editMessageReplyMarkup|editMarkup      |
-|stopPoll             |stopPoll         |
-|deleteMessage        |deleteMessage    |
+|Metodo         |Funzione nella libreria |Note  |
+|-----                |-------------    |------ |
+|getMe                |test             |       |
+|sendMessage          |message          |       |
+|forwardMessage       |forward          |       |
+|sendPhoto            |photo            |       |
+|sendAudio            |audio            |       |
+|sendDocument         |document         |       |
+|sendVideo            |video            |       |
+|sendAnimation        |animation        |       |
+|sendPoll             |poll             |L'argomento "options" deve essere un array json_encoded!|
+|sendChatAction       |cahtAction       |       |
+|getUserProfilePhotos |propic           |       |
+|getFile              |file             |       |
+|kickChatMember       |kick             |       |
+|unbanChatMember      |unban            |       |
+|restrictChatMember   |restrict         |       |
+|promoteChatMember    |promote          |       |
+|exportChatInviteLink |inviteLink       |       |
+|setChatTitle         |chatTitle        |       |
+|setChatDescription   |chatDescription  |       |
+|pinChatMessage       |pin              |       |
+|unpinChatMessage     |unpin            |       |
+|leaveChat            |leave            |       |
+|getChat              |chatInfo         |       |
+|getChatAdministrators|admins           |       |
+|getChatMembersCount  |membersCount     |       |
+|getChatMember        |member           |       |
+|setChatStickerSet    |setSticker       |       |
+|deleteChatStickerSet |deleteSticker    |       |
+|answerCallbackQuery  |callbackQuery    |       |
+|editMessageText      |editText         |       |
+|editMessageCaption   |editCaption      |       |
+|editMessageMedia     |editMedia        |       |
+|editMessageReplyMarkup|editMarkup      |       |
+|stopPoll             |stopPoll         |       |
+|deleteMessage        |deleteMessage    |       |
 
 ### Impostare una chat o un insieme di chat
 Quasi tutti i metodi di Telegram dedicati ai bot richiedono di specificare un **ID identificatore della chat** nella quale l'operazione descritta dal metodo sarà eseguita. La librearia cerca di semplificare questa operazione in modo da **evitare di specificare l'ID o gli ID** ogni volta che si richiama una funzione.
