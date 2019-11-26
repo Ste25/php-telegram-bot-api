@@ -28,12 +28,15 @@ class Bot extends Keyboard
      * Add one or more chat(s).
      * 
      * @param string|int|array $chat
+     * @param bool $select
      * @return $this
      */
-    public function addChat($chat)
+    public function addChat($chat, $select = false)
     {
         if(!is_array($chat)) $chat = func_get_args();
+        if(end($chat) === false || end($chat) === true) array_pop($chat);
         $this->chat = array_unique(array_merge($this->chat, $chat));
+        if($select) $this->selectChat($chat);
         return $this;
     }
 
@@ -75,7 +78,7 @@ class Bot extends Keyboard
     public function selectChat($chat = 'all')
     {
         $this->currentParams['chat'] = array();
-        if($chat === 'all') $this->currentParams['chat'][] = 0;
+        if($chat === 'all') $this->currentParams['chat'][] = 'all';
         else {
             if(!is_array($chat)) $chat = func_get_args();
             foreach($chat as $single) {
@@ -234,12 +237,12 @@ class Bot extends Keyboard
      * 
      * @link https://core.telegram.org/bots/api#sendpoll
      * @param string $question
-     * @param array $options
+     * @param string $options
      * @param bool $disable_notification
      * @param int $reply_to_message_id
      * @return $this
      */
-    public function poll($question, $options, $disable_notification = false, $reply_to_message_id = null)
+    public function poll($question, $options = null, $disable_notification = false, $reply_to_message_id = null)
     {
         $this->setParams(func_get_args(), $this->setApi('sendPoll', ['question', 'options', 'disable_notification', 'reply_to_message_id']));
         return $this;
@@ -529,7 +532,7 @@ class Bot extends Keyboard
      * @param bool $disable_web_page_preview
      * @return $this
      */
-    public function editText($message_id, $inline_message_id, $text, $parse_mode = 'markdown', $disable_web_page_preview = false)
+    public function editText($message_id, $inline_message_id = '', $text = '', $parse_mode = 'markdown', $disable_web_page_preview = false)
     {
         $this->setParams(func_get_args(), $this->setApi('editMessageText', ['message_id', 'inline_message_id', 'text', 'parse_mode', 'disable_web_page_preview']));
         return $this;
@@ -545,7 +548,7 @@ class Bot extends Keyboard
      * @param string $parse_mode
      * @return $this
      */
-    public function editCaption($message_id, $inline_message_id, $caption, $parse_mode = 'markdown')
+    public function editCaption($message_id, $inline_message_id = '', $caption = '', $parse_mode = 'markdown')
     {
         $this->setParams(func_get_args(), $this->setApi('editMessageCaption', ['message_id', 'inline_message_id', 'caption', 'parse_mode']));
         return $this;
@@ -560,7 +563,7 @@ class Bot extends Keyboard
      * @param string $media
      * @return $this
      */
-    public function editMedia($message_id, $inline_message_id, $media)
+    public function editMedia($message_id, $inline_message_id = '', $media = '')
     {
         $this->setParams(func_get_args(), $this->setApi('editMessageMedia', ['message_id', 'inline_message_id', 'media']));
         return $this;
@@ -607,6 +610,34 @@ class Bot extends Keyboard
     }
 
     /**
+     * Prepare a sticker.
+     * 
+     * @link https://core.telegram.org/bots/api#sendsticker
+     * @param string|array $sticker
+     * @param bool $disable_notification
+     * @param int $reply_to_message_id
+     * @return $this
+     */
+    public function sticker($sticker, $disable_notification = false, $reply_to_message_id = null)
+    {
+        $this->setParams(func_get_args(), $this->setApi('sendSticker', ['sticker', 'disable_notification', 'reply_to_message_id']));
+        return $this;
+    }
+
+    /**
+     * Prepare to get a sticker set.
+     * 
+     * @link https://core.telegram.org/bots/api#getstickerset
+     * @param string|array $name
+     * @return $this
+     */
+    public function getStickerSet($name)
+    {
+        $this->setParams(func_get_args(), $this->setApi('getStickerSet', ['name']));
+        return $this;
+    }
+
+    /**
      * Attach custom keyboard.
      * 
      * @param array $keyboard
@@ -615,8 +646,8 @@ class Bot extends Keyboard
     public function withKeyboard($keyboard)
     {
         foreach($this->currentParams['chat'] as $chat) {
-            for($i = $this->currentParams['index'][$chat]['start']; $i < $this->currentParams['index'][$chat]['end']; $i++) {
-                $this->params[$this->currentParams['method']][$chat][$i]['reply_markup'] = json_encode($keyboard);
+            for($i = $this->currentParams['index']['chat' . $chat]['start']; $i < $this->currentParams['index']['chat' . $chat]['end']; $i++) {
+                $this->params[$this->currentParams['method']]['chat' . $chat][$i]['reply_markup'] = json_encode($keyboard);
             }
         }
         return $this;
@@ -633,8 +664,8 @@ class Bot extends Keyboard
     {
         $force_reply = true;
         foreach($this->currentParams['chat'] as $chat) {
-            for($i = $this->currentParams['index'][$chat]['start']; $i < $this->currentParams['index'][$chat]['end']; $i++) {
-                $this->params[$this->currentParams['method']][$chat][$i]['reply_markup'] = json_encode(compact('force_reply', 'selective'));
+            for($i = $this->currentParams['index']['chat' . $chat]['start']; $i < $this->currentParams['index']['chat' . $chat]['end']; $i++) {
+                $this->params[$this->currentParams['method']]['chat' . $chat][$i]['reply_markup'] = json_encode(compact('force_reply', 'selective'));
             }
         }
         return $this;
@@ -651,8 +682,8 @@ class Bot extends Keyboard
     {
         $remove_keyboard = true;
         foreach($this->currentParams['chat'] as $chat) {
-            for($i = $this->currentParams['index'][$chat]['start']; $i < $this->currentParams['index'][$chat]['end']; $i++) {
-                $this->params[$this->currentParams['method']][$chat][$i]['reply_markup'] = json_encode(compact('remove_keyboard', 'selective'));
+            for($i = $this->currentParams['index']['chat' . $chat]['start']; $i < $this->currentParams['index']['chat' . $chat]['end']; $i++) {
+                $this->params[$this->currentParams['method']]['chat' . $chat][$i]['reply_markup'] = json_encode(compact('remove_keyboard', 'selective'));
             }
         }
         return $this;
@@ -667,11 +698,11 @@ class Bot extends Keyboard
      */
     public function getResult($chat = null, $method = null)
     {
-        if(!empty($chat)) {
-            if(isset($this->chat[$chat])) $chat = 'chat' . $this->chat[$chat];
+        if($chat !== null) {
+            if(isset($this->chat[$chat]) && !is_numeric($chat)) $chat = 'chat' . $this->chat[$chat];
             else $chat = 'chat' . $chat;
         }
-        return empty($chat) ? $this->result : (empty($method) ? $this->result[$chat] : $this->result[$chat][$method]);
+        return $chat === null ? $this->result : (isset($this->result[$chat]) ? (empty($method) ? $this->result[$chat] : (isset($this->result[$chat][$method]) ? $this->result[$chat][$method] : false)) : false);
     }
 
     /**
@@ -684,11 +715,11 @@ class Bot extends Keyboard
     public function getRequest($chat = null, $method = null)
     {
         $request = json_decode(preg_replace('/bot.*?\//', 'botTOKEN\/',  json_encode($this->request)), true);
-        if(!empty($chat)) {
-            if(isset($this->chat[$chat])) $chat = 'chat' . $this->chat[$chat];
+        if($chat !== null) {
+            if(isset($this->chat[$chat]) && !is_numeric($chat)) $chat = 'chat' . $this->chat[$chat];
             else $chat = 'chat' . $chat;
         }
-        return empty($chat) ? $request : (empty($method) ? $request[$chat] : $request[$chat][$method]);
+        return $chat === null ? $request : (isset($request[$chat]) ? (empty($method) ? $request[$chat] : (isset($request[$chat][$method]) ? $request[$chat][$method] : false)) : false);
     }
 
     /**
@@ -700,10 +731,10 @@ class Bot extends Keyboard
      */
     public function getSuccess($chat = null, $method = null)
     {
-        if(!empty($chat)) {
-            if(isset($this->chat[$chat])) $chat = 'chat' . $this->chat[$chat];
+        if($chat !== null) {
+            if(isset($this->chat[$chat]) && !is_numeric($chat)) $chat = 'chat' . $this->chat[$chat];
             else $chat = 'chat' . $chat;
         }
-        return empty($chat) ? $this->success : (empty($method) ? $this->success[$chat] : $this->success[$chat][$method]);
+        return $chat === null ? $this->success : (isset($this->success[$chat]) ? (empty($method) ? $this->success[$chat] : (isset($this->success[$chat][$method]) ? $this->success[$chat][$method] : false)) : false);
     }
 }
