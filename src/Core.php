@@ -25,7 +25,7 @@ class Core
         $this->apiUrl = 'https://api.telegram.org/bot' . $token . '/';
         $this->chat = array();
         $this->currentParams = [
-            'chat' => [0]
+            'chat' => ['all']
         ];
         $this->apiMethod = array();
         $this->methodList = [
@@ -239,6 +239,18 @@ class Core
                     'chat_id' => true
                 ]
             ],
+            'sendSticker' => [
+                'name' => 'sticker',
+                'params' => [
+                    'chat_id' => true
+                ]
+            ],
+            'getStickerSet' => [
+                'name' => 'getStickerSet',
+                'params' => [
+                    'chat_id' => false
+                ]
+            ]
         ];
         $this->params = array();
         $this->keyboardOptions = [
@@ -263,13 +275,13 @@ class Core
                 if(!empty($this->params[$method])) {
                     if($this->methodList[$method]['params']['chat_id']) {
                         foreach($this->chat as $chat) {
-                            if(isset($this->params[$method][0])) {
-                                foreach($this->params[$method][0] as $singleParams) {
+                            if(isset($this->params[$method]['chatall'])) {
+                                foreach($this->params[$method]['chatall'] as $singleParams) {
                                     $this->execute($ch, $chat, $method, $singleParams);
                                 }
                             }
-                            if(isset($this->params[$method][$chat])) {
-                                foreach($this->params[$method][$chat] as $singleParams) $this->execute($ch, $chat, $method, $singleParams);
+                            if(isset($this->params[$method]['chat' . $chat])) {
+                                foreach($this->params[$method]['chat' . $chat] as $singleParams) $this->execute($ch, $chat, $method, $singleParams);
                             }
                         }
                     }
@@ -288,6 +300,16 @@ class Core
             }
             curl_close($ch);
             $this->apiMethod = array();
+            $this->params = array();
+            $this->currentParams = [
+                'chat' => ['all']
+            ];
+            $this->keyboardOptions = [
+                'type' => '',
+                'rows' => array(),
+                'currentRow' => 1,
+                'buttonList' => array()
+            ];
         }
         return;
     }
@@ -364,10 +386,10 @@ class Core
             return;
         }
         foreach($this->currentParams['chat'] as $chat) {
-            if(!isset($this->params[$method][$chat])) $this->params[$method][$chat] = array();
-            $this->currentParams['index'][$chat] = ['start' => count($this->params[$method][$chat])];
-            $this->params[$method][$chat] = array_merge($this->params[$method][$chat], $params);
-            $this->currentParams['index'][$chat]['end'] = count($this->params[$method][$chat]);
+            if(!isset($this->params[$method]['chat' . $chat])) $this->params[$method]['chat' . $chat] = array();
+            $this->currentParams['index']['chat' . $chat] = ['start' => count($this->params[$method]['chat' . $chat])];
+            $this->params[$method]['chat' . $chat] = array_merge($this->params[$method]['chat' . $chat], $params);
+            $this->currentParams['index']['chat' . $chat]['end'] = count($this->params[$method]['chat' . $chat]);
         }
         return;
     }
