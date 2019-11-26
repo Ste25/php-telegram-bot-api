@@ -97,6 +97,8 @@ The methods described by [the Official Telegram's API](https://core.telegram.org
 |editMessageReplyMarkup|editMarkup      |       |
 |stopPoll             |stopPoll         |       |
 |deleteMessage        |deleteMessage    |       |
+|sendSticker          |sticker          |       |
+|getStickerSet        |getStickerSet    |       |
 ### Set one or more chat(s)
 Almost all Telegram's methods require a **chat ID**, an integer (or a string) that identify users, groups and channels. This library allow you to **set one or more IDs only _one_ time**.
 ### First chat(s)
@@ -120,6 +122,7 @@ It's possible to use an array (same as `chat`):
 ```php
 $bot->addChat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
 ```
+If the last argument is `true`, the added chats will be selected.
 #### Remove one or more chat(s)
 You can _remove_ chats using `removeChat`:
 ```php
@@ -522,6 +525,8 @@ I metodi forniti e descritti [dall'API Ufficiale di Telegram](https://core.teleg
 |editMessageReplyMarkup|editMarkup      |       |
 |stopPoll             |stopPoll         |       |
 |deleteMessage        |deleteMessage    |       |
+|sendSticker          |sticker          |       |
+|getStickerSet        |getStickerSet    |       |
 
 ### Impostare una chat o un insieme di chat
 Quasi tutti i metodi di Telegram dedicati ai bot richiedono di specificare un **ID identificatore della chat** nella quale l'operazione descritta dal metodo sarà eseguita. La librearia cerca di semplificare questa operazione in modo da **evitare di specificare l'ID o gli ID** ogni volta che si richiama una funzione.
@@ -546,6 +551,7 @@ Anche in questo caso è possibile usare un array per nominare le chat aggiunte:
 ```php
 $bot->addChat(['Amy' => 'fourth_chat', 'Penny' => 'fifth_chat', 'Bernadette' => 'sixth_chat', 'Etc...' => 'etc...]);
 ```
+Passando come ultimo parametro `true`, le chat aggiunte verranno automaticamente selezionate.
 #### Rimuovere una chat o un insieme di chat
 Naturalmente è anche possibile rimuovere dall'elenco una o più chat tramite la funzione `removeChat`:
 ```php
