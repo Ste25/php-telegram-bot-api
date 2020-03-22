@@ -509,6 +509,7 @@ class Bot extends Keyboard
      * Prepare a callback query.
      * 
      * @link https://core.telegram.org/bots/api#answercallbackquery
+     * @param string|int $callback_query_id
      * @param string $text
      * @param bool $show_alert
      * @param string $url
@@ -530,11 +531,12 @@ class Bot extends Keyboard
      * @param string $text
      * @param string $parse_mode
      * @param bool $disable_web_page_preview
+     * @param string $reply_markup
      * @return $this
      */
-    public function editText($message_id, $inline_message_id = '', $text = '', $parse_mode = 'markdown', $disable_web_page_preview = false)
+    public function editText($message_id, $inline_message_id = '', $text = '', $parse_mode = 'markdown', $disable_web_page_preview = false, $reply_markup = null)
     {
-        $this->setParams(func_get_args(), $this->setApi('editMessageText', ['message_id', 'inline_message_id', 'text', 'parse_mode', 'disable_web_page_preview']));
+        $this->setParams(func_get_args(), $this->setApi('editMessageText', ['message_id', 'inline_message_id', 'text', 'parse_mode', 'disable_web_page_preview', 'reply_markup']));
         return $this;
     }
 
@@ -546,11 +548,12 @@ class Bot extends Keyboard
      * @param string $inline_message_id
      * @param string $caption
      * @param string $parse_mode
+     * @param string $reply_markup
      * @return $this
      */
-    public function editCaption($message_id, $inline_message_id = '', $caption = '', $parse_mode = 'markdown')
+    public function editCaption($message_id, $inline_message_id = '', $caption = '', $parse_mode = 'markdown', $reply_markup = null)
     {
-        $this->setParams(func_get_args(), $this->setApi('editMessageCaption', ['message_id', 'inline_message_id', 'caption', 'parse_mode']));
+        $this->setParams(func_get_args(), $this->setApi('editMessageCaption', ['message_id', 'inline_message_id', 'caption', 'parse_mode', 'reply_markup']));
         return $this;
     }
 
@@ -561,11 +564,12 @@ class Bot extends Keyboard
      * @param int $message_id
      * @param string $inline_message_id
      * @param string $media
+     * @param string $reply_markup
      * @return $this
      */
-    public function editMedia($message_id, $inline_message_id = '', $media = '')
+    public function editMedia($message_id, $inline_message_id = '', $media = '', $reply_markup = null)
     {
-        $this->setParams(func_get_args(), $this->setApi('editMessageMedia', ['message_id', 'inline_message_id', 'media']));
+        $this->setParams(func_get_args(), $this->setApi('editMessageMedia', ['message_id', 'inline_message_id', 'media', 'reply_markup']));
         return $this;
     }
 
@@ -575,11 +579,12 @@ class Bot extends Keyboard
      * @link https://core.telegram.org/bots/api#editmessagereplymarkup
      * @param int $message_id
      * @param string $inline_message_id
+     * @param string $reply_markup
      * @return $this
      */
-    public function editMarkup($message_id, $inline_message_id = '')
+    public function editMarkup($message_id, $inline_message_id = '', $reply_markup = null)
     {
-        $this->setParams(func_get_args(), $this->setApi('editMessageReplyMarkup', ['message_id', 'inline_message_id']));
+        $this->setParams(func_get_args(), $this->setApi('editMessageReplyMarkup', ['message_id', 'inline_message_id', 'reply_markup']));
         return $this;
     }
 
@@ -634,6 +639,23 @@ class Bot extends Keyboard
     public function getStickerSet($name)
     {
         $this->setParams(func_get_args(), $this->setApi('getStickerSet', ['name']));
+        return $this;
+    }
+
+    /**
+     * Prepare an inline query.
+     * 
+     * @link https://core.telegram.org/bots/api#answerinlinequery
+     * 
+     * @param string $text
+     * @param bool $show_alert
+     * @param string $url
+     * @param int $cache_time
+     * @return $this
+     */
+    public function inlineQuery($inline_query_id, $results = [], $cache_time = 0, $is_personal = false, $next_offset = '', $switch_pm_text = '', $switch_pm_parameter = '')
+    {
+        $this->setParams(func_get_args(), $this->setApi('answerInlineQuery', ['inline_query_id', 'results', 'cache_time', 'is_personal', 'next_offset', 'switch_pm_text', 'switch_pm_parameter']));
         return $this;
     }
 
