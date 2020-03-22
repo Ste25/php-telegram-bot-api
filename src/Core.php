@@ -206,25 +206,29 @@ class Core
             'editMessageText' => [
                 'name' => 'editText',
                 'params' => [
-                    'chat_id' => true
+                    'chat_id' => true,
+                    'required' => ['message_id']
                 ]
             ],
             'editMessageCaption' => [
                 'name' => 'editCaption',
                 'params' => [
-                    'chat_id' => true
+                    'chat_id' => true,
+                    'required' => ['message_id']
                 ]
             ],
             'editMessageMedia' => [
                 'name' => 'editMedia',
                 'params' => [
-                    'chat_id' => true
+                    'chat_id' => true,
+                    'required' => ['message_id']
                 ]
             ],
             'editMessageReplyMarkup' => [
                 'name' => 'editMarkup',
                 'params' => [
-                    'chat_id' => true
+                    'chat_id' => true,
+                    'required' => ['message_id']
                 ]
             ],
             'stopPoll' => [
@@ -247,6 +251,12 @@ class Core
             ],
             'getStickerSet' => [
                 'name' => 'getStickerSet',
+                'params' => [
+                    'chat_id' => false
+                ]
+            ],
+            'answerInlineQuery' => [
+                'name' => 'inlineQuery',
                 'params' => [
                     'chat_id' => false
                 ]
@@ -285,8 +295,10 @@ class Core
                             }
                         }
                     }
-                    else {
-                        foreach($this->params[$method]['nochat'] as $singleParams) $this->execute($ch, 0, $method, $singleParams);
+                    if(!empty($this->params[$method]['nochat'])) {
+                        foreach($this->params[$method]['nochat'] as $singleParams) {
+                            $this->execute($ch, 0, $method, $singleParams);
+                        }
                     }
                 }
                 else {
@@ -299,6 +311,7 @@ class Core
                 }
             }
             curl_close($ch);
+            //$this->chat = array();
             $this->apiMethod = array();
             $this->params = array();
             $this->currentParams = [
@@ -385,11 +398,27 @@ class Core
             $this->params[$method]['nochat'] = array_merge($this->params[$method]['nochat'], $params);
             return;
         }
-        foreach($this->currentParams['chat'] as $chat) {
-            if(!isset($this->params[$method]['chat' . $chat])) $this->params[$method]['chat' . $chat] = array();
-            $this->currentParams['index']['chat' . $chat] = ['start' => count($this->params[$method]['chat' . $chat])];
-            $this->params[$method]['chat' . $chat] = array_merge($this->params[$method]['chat' . $chat], $params);
-            $this->currentParams['index']['chat' . $chat]['end'] = count($this->params[$method]['chat' . $chat]);
+        if(isset($this->methodList[$method]['params']['required'])) {
+            if(!isset($this->params[$method]['nochat'])) $this->params[$method]['nochat'] = array();
+            $delete = [];
+            foreach($params as $key => $param) {
+                foreach($this->methodList[$method]['params']['required'] as $required) {
+                    if(!isset($param[$required])) {
+                        $this->params[$method]['nochat'] = array_merge($this->params[$method]['nochat'], [$param]);
+                        $delete[] = $key;
+                        break;
+                    }
+                }
+            }
+            foreach($delete as $key) unset($params[$key]);
+        }
+        if(!empty($params)) {
+            foreach($this->currentParams['chat'] as $chat) {
+                if(!isset($this->params[$method]['chat' . $chat])) $this->params[$method]['chat' . $chat] = array();
+                $this->currentParams['index']['chat' . $chat] = ['start' => count($this->params[$method]['chat' . $chat])];
+                $this->params[$method]['chat' . $chat] = array_merge($this->params[$method]['chat' . $chat], $params);
+                $this->currentParams['index']['chat' . $chat]['end'] = count($this->params[$method]['chat' . $chat]);
+            }
         }
         return;
     }
